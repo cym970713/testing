@@ -16,6 +16,9 @@ jobs:
         with:
             repository: timheuer/SimpleFrameworkApp
             ref: master
+            
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
 
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v2
@@ -27,5 +30,7 @@ jobs:
 
       - name: Run a multi-line script
         run: |
+            nuget restore SimpleFrameworkApp.sln
+            nuget restore SimpleFrameworkApp.csproj
             msbuild SimpleFrameworkApp.csproj
             msbuild SimpleFrameworkApp.sln
